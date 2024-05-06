@@ -11,7 +11,9 @@
         y = 1080;
       };
 
-      qemu.options = [ "-m 16G" /** More Memory */ ];
+      qemu.options = [
+        "-m 16G" # * More Memory
+      ];
     };
 
   };

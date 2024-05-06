@@ -43,7 +43,10 @@
           profile = evalProfile profileName;
         in lib.nixosSystem {
           modules = [ module ./modules/system ];
-          specialArgs = { inherit (self) inputs; inherit profile; };
+          specialArgs = {
+            inherit (self) inputs;
+            inherit profile;
+          };
         });
 
       formatter =

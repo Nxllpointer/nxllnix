@@ -11,7 +11,7 @@
           set -x STARSHIP_CONFIG ${pkgs.starship}/share/starship/presets/pastel-powerline.toml
           eval (${pkgs.starship}/bin/starship init fish)
         end
-    '';
+      '';
     };
   };
 
