@@ -16,9 +16,10 @@
   system.stateVersion = "23.11";
   nixpkgs.config.allowUnfree = true;
 
-  nix.nixPath = [
-    "nixpkgs=${inputs.nixpkgs.outPath}"
-  ];
+  nix = {
+    settings = { experimental-features = [ "flakes" "nix-command" ]; };
+    nixPath = [ "nixpkgs=${inputs.nixpkgs.outPath}" ];
+  };
 
   environment.systemPackages = with pkgs; [
     file
