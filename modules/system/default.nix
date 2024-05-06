@@ -30,6 +30,7 @@
     firefox
     vscode
     libsForQt5.kate
+    vesktop
   ];
 
 }
