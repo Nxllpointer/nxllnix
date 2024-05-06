@@ -15,7 +15,9 @@
   ];
 
   system.stateVersion = "23.11";
+
   nixpkgs.config.allowUnfree = true;
+  environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
 
   nix = {
     settings = { experimental-features = [ "flakes" "nix-command" ]; };
