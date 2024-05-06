@@ -7,6 +7,7 @@
     ./localization.nix
     ./users.nix
     ./networking.nix
+    ./sound.nix
     ./index.nix
     ./shell.nix
     ./fonts.nix
@@ -21,11 +22,6 @@
     nixPath = [ "nixpkgs=${inputs.nixpkgs.outPath}" ];
   };
 
-  environment.systemPackages = with pkgs; [
-    file
-    git
-    firefox
-    vscode
-  ];
+  environment.systemPackages = with pkgs; [ file git firefox vscode ];
 
 }
