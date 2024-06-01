@@ -2,7 +2,7 @@
   description = "Nxllpointer's NixOS flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-23.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.05";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,7 +49,7 @@
           };
         });
 
-      formatter =
-        forAllSystems (system: (import nixpkgs { inherit system; }).nixfmt);
+      formatter = forAllSystems
+        (system: (import nixpkgs { inherit system; }).nixfmt-classic);
     };
 }

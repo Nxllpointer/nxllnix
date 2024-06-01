@@ -1,8 +1,10 @@
 {
-  services.xserver = {
-    enable = true;
+  services = {
     displayManager.sddm.enable = true;
-    desktopManager.plasma5.enable = true;
+    xserver = {
+      enable = true;
+      desktopManager.plasma5.enable = true;
+    };
   };
 
   # Useable FPS for games. Kwin is weird
