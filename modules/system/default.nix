@@ -31,6 +31,7 @@
     vscode
     libsForQt5.kate
     vesktop
+    btop
   ];
 
 }
