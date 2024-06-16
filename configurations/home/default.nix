@@ -1,10 +1,5 @@
-{
-  profile = "private.nix";
+{ config, lib, pkgs, ... }: {
+  imports = [ ./hardware-configuration.nix ./nvidia.nix ];
 
-  module = { config, lib, pkgs, ... }: {
-    imports = [ ./hardware-configuration.nix ./nvidia.nix ];
-
-    boot.tmp.useTmpfs = true;
-  };
+  boot.tmp.useTmpfs = true;
 }
-

@@ -28,25 +28,13 @@
           };
         }) configurationNames);
 
-      evalProfile = profileName:
-        (lib.evalModules {
-          modules = [ (./profiles + "/${profileName}") ./modules/profile ];
-        }).config;
-
     in {
       inputSet = inputs;
       nixosConfigurations = createConfigurations ({ name, path, }:
         let
-          configuration = import path;
-          profileName = configuration.profile;
-          module = configuration.module;
-          profile = evalProfile profileName;
         in lib.nixosSystem {
-          modules = [ module ./modules/system ];
-          specialArgs = {
-            inherit (self) inputs;
-            inherit profile;
-          };
+          modules = [ path ./modules/system ];
+          specialArgs = { inherit (self) inputs; };
         });
 
       formatter = forAllSystems

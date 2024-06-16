@@ -1,5 +1,3 @@
-{ profile, ... }:
-
 rec {
   time.timeZone = "Europe/Berlin";
 
