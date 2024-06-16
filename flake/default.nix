@@ -9,7 +9,8 @@ let
         inherit system;
         pkgs = import nixpkgs { inherit system; };
       }));
-in {
+in
+{
   nixosConfigurations = (import ./nixosConfigurations.nix) lib inputs;
   formatter = forSupportedSystems (import ./formatter.nix);
 }

@@ -1,1 +1,1 @@
-{ pkgs, ... }: pkgs.nixfmt-classic
+{ pkgs, ... }: pkgs.nixpkgs-fmt

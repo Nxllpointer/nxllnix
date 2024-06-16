@@ -13,4 +13,5 @@ let
     };
 
   configurations = lib.genAttrs configurationNames createConfiguration;
-in configurations
+in
+configurations
