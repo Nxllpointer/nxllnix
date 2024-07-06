@@ -12,6 +12,7 @@
     ./shell.nix
     ./fonts.nix
     ./desktop
+    ./printing.nix
   ];
 
   system.stateVersion = "23.11";
