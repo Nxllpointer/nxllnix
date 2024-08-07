@@ -4,7 +4,7 @@
   programs = {
     fish = {
       enable = true;
-      promptInit = ''
+      promptInit = /* fish */ ''
         set -g fish_greeting ""
 
         if test "$TERM" = "xterm-256color"
@@ -13,6 +13,8 @@
         end
 
         ${pkgs.nix-your-shell}/bin/nix-your-shell fish | source
+
+        set --erase SSH_ASKPASS # Otherwise git uses ksshaskpass *sigh*
       '';
     };
   };
