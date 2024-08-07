@@ -34,6 +34,7 @@
     vesktop
     btop
     trash-cli
+    bat
   ];
 
 }
