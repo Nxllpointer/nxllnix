@@ -1,6 +1,6 @@
 lib: inputs:
 let
-  defaultModule = { ... }: { imports = [ ./../modules/system ]; };
+  defaultModule = { ... }: { imports = [ ./../modules/nixos ]; };
 
   configurationDir = ./../configurations;
 
