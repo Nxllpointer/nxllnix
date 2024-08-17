@@ -27,7 +27,6 @@
 
   environment.systemPackages = with pkgs; [
     file
-    git
     firefox
     vscode
     libsForQt5.kate

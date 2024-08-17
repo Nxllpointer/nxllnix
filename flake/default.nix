@@ -1,4 +1,4 @@
-{ self, nixpkgs, ... }@inputs:
+{ nixpkgs, ... }@inputs:
 let
   inherit (nixpkgs) lib;
 
