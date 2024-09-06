@@ -57,11 +57,28 @@
         "type": "github"
       }
     },
+    "rhythia-git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722809500,
+        "narHash": "sha256-eRUQ1UfyqfdiPaTB4E4ykg/E8BBBqN2h1rdcsoEHPVY=",
+        "owner": "David20122",
+        "repo": "sound-space-plus",
+        "rev": "c86c8895b9ec917e70fc6aa347b7824090cd66f9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "David20122",
+        "repo": "sound-space-plus",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "home-manager": "home-manager",
         "nix-index-database": "nix-index-database",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "rhythia-git": "rhythia-git"
       }
     }
   },

@@ -17,6 +17,8 @@
 
   system.stateVersion = "23.11";
 
+  nixpkgs.overlays = [ (import ./../../pkgs inputs) ];
+
   nixpkgs.config.allowUnfree = true;
   environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
 
@@ -34,6 +36,7 @@
     btop
     trash-cli
     bat
+    rhythia
   ];
 
 }
