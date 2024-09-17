@@ -27,6 +27,8 @@
     nixPath = [ "nixpkgs=${inputs.nixpkgs.outPath}" ];
   };
 
+  boot.kernel.sysctl."kernel.sysrq" = 1; # Enable all SysRq features
+
   environment.systemPackages = with pkgs; [
     file
     firefox
