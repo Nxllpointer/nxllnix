@@ -28,11 +28,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728790083,
-        "narHash": "sha256-grMdAd4KSU6uPqsfLzA1B/3pb9GtGI9o8qb0qFzEU/Y=",
+        "lastModified": 1730604744,
+        "narHash": "sha256-/MK6QU4iOozJ4oHTfZipGtOgaT/uy/Jm4foCqHQeYR4=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "5c54c33aa04df5dd4b0984b7eb861d1981009b22",
+        "rev": "cc2ddbf2df8ef7cc933543b1b42b845ee4772318",
         "type": "github"
       },
       "original": {
@@ -43,11 +43,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1728909085,
-        "narHash": "sha256-WLxED18lodtQiayIPDE5zwAfkPJSjHJ35UhZ8h3cJUg=",
+        "lastModified": 1730883749,
+        "narHash": "sha256-mwrFF0vElHJP8X3pFCByJR365Q2463ATp2qGIrDUdlE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "c0b1da36f7c34a7146501f684e9ebdf15d2bebf8",
+        "rev": "dba414932936fde69f0606b4f1d87c5bc0003ede",
         "type": "github"
       },
       "original": {
@@ -60,11 +60,11 @@
     "rhythia-git": {
       "flake": false,
       "locked": {
-        "lastModified": 1727887990,
-        "narHash": "sha256-ufkGeezONgLjeVzsqz9jpF8CMP+j4fHeM0Ym7FrDhIc=",
+        "lastModified": 1730313425,
+        "narHash": "sha256-HI4WWJbNY0RyG3ORP/jY3YaXTBSODHq1ZijxYmeoNkY=",
         "owner": "David20122",
         "repo": "sound-space-plus",
-        "rev": "6d79155aa62d81523605850a4e60afd20fecec69",
+        "rev": "e944e25247a27279e6219e8a1ba4f6e231e7ccf7",
         "type": "github"
       },
       "original": {
