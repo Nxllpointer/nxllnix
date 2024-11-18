@@ -18,6 +18,8 @@
       url = "github:David20122/sound-space-plus";
       flake = false;
     };
+
+    opentabletdriver.url = "github:opentabletdriver/opentabletdriver?rev=0313c633b03306c98eedcd75bf22d0599bd6e51d";
   };
 
   # outputs is not allowed to be a thunk so a wrapper function is used to import the outputs

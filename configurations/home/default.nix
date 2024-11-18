@@ -3,4 +3,8 @@
 
   boot.tmp.useTmpfs = true;
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  hardware.opentabletdriver = {
+    enable = true;
+  };
 }
