@@ -39,6 +39,7 @@
     trash-cli
     bat
     rhythia
+    libreoffice
   ];
 
 }
