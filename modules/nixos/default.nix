@@ -40,6 +40,7 @@
     bat
     rhythia
     libreoffice
+    flameshot
   ];
 
 }
