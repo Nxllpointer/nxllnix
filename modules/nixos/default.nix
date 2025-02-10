@@ -42,6 +42,7 @@
     libreoffice
     flameshot
     cameractrls-gtk4
+    prismlauncher
   ];
 
 }
