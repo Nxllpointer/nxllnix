@@ -41,6 +41,7 @@
     rhythia
     libreoffice
     flameshot
+    cameractrls-gtk4
   ];
 
 }
