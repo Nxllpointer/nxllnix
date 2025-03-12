@@ -13,6 +13,7 @@
     ./fonts.nix
     ./desktop
     ./printing.nix
+    ./video.nix
   ];
 
   system.stateVersion = "23.11";
