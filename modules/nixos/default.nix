@@ -11,25 +11,17 @@
     ./index.nix
     ./shell.nix
     ./fonts.nix
-    ./desktop
+    ./desktop.nix
     ./printing.nix
     ./video.nix
     ./input.nix
+    ./nix.nix
   ];
 
   system.stateVersion = "23.11";
-
   nixpkgs.overlays = [ (import ./../../pkgs inputs) ];
-
   nixpkgs.config.allowUnfree = true;
   environment.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
-
-  nix = {
-    settings = { experimental-features = [ "flakes" "nix-command" ]; };
-    nixPath = [ "nixpkgs=${inputs.nixpkgs.outPath}" ];
-  };
-
-  boot.kernel.sysctl."kernel.sysrq" = 1; # Enable all SysRq features
 
   environment.systemPackages = with pkgs; [
     file
