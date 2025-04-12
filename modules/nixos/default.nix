@@ -14,6 +14,7 @@
     ./desktop
     ./printing.nix
     ./video.nix
+    ./input.nix
   ];
 
   system.stateVersion = "23.11";
