@@ -38,5 +38,4 @@
     cameractrls-gtk4
     prismlauncher
   ];
-
 }
