@@ -58,5 +58,5 @@ load-env {
   CARAPACE_BRIDGES: "zsh,fish,bash"
 }
 
-alias nix = nix-your-shell nu nix
-alias nix-shell = nix-your-shell nu nix-shell
+alias nix = nix-your-shell nu nix --
+alias nix-shell = nix-your-shell nu nix-shell --
