@@ -1,16 +1,10 @@
-{
+{ pkgs, ... }: {
   services = {
     displayManager.sddm.enable = true;
-    xserver = {
-      enable = true;
-      desktopManager.plasma5.enable = true;
-    };
+    displayManager.sddm.wayland.enable = true;
+    desktopManager.plasma6.enable = true;
+    xserver.enable = true;
   };
-
-  # Useable FPS for games. Kwin is weird
-  environment.sessionVariables = {
-    KWIN_X11_REFRESH_RATE = "144000";
-    KWIN_X11_NO_SYNC_TO_VBLANK = "1";
-    KWIN_X11_FORCE_SOFTWARE_VSYNC = "1";
-  };
+  
+  environment.systemPackages = [ pkgs.kdePackages.kzones ];
 }

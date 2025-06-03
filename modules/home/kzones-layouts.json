@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Ninezones",
+        "padding": 20,
+        "zones": [
+            { "x": 0, "y": 40, "height": 60, "width": 25 },
+            { "x": 25, "y": 40, "height": 60, "width": 50 },
+            { "x": 75, "y": 40, "height": 60, "width": 25 },
+
+            { "x": 0, "y": 0, "height": 100, "width": 25 },
+            { "x": 25, "y": 0, "height": 100, "width": 50 },
+            { "x": 75, "y": 0, "height": 100, "width": 25 },
+
+            { "x": 0, "y": 0, "height": 40, "width": 25 },
+            { "x": 25, "y": 0, "height": 40, "width": 50 },
+            { "x": 75, "y": 0, "height": 40, "width": 25 }
+        ]
+    }
+]
