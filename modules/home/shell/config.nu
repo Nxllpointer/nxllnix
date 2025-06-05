@@ -60,3 +60,5 @@ load-env {
 
 alias nix = nix-your-shell nu nix --
 alias nix-shell = nix-your-shell nu nix-shell --
+
+$env.SHELL = "nu"
