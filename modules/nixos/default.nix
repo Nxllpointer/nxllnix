@@ -27,7 +27,7 @@
     file
     firefox
     vscode
-    libsForQt5.kate
+    kdePackages.kate
     vesktop
     btop
     trash-cli
