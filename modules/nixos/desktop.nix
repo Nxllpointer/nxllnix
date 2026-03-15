@@ -5,6 +5,6 @@
     desktopManager.plasma6.enable = true;
     xserver.enable = true;
   };
-  
+
   environment.systemPackages = [ pkgs.kdePackages.kzones ];
 }

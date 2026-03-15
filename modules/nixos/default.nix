@@ -7,6 +7,7 @@
     ./localization.nix
     ./users.nix
     ./networking.nix
+    ./impermanence.nix
     ./sound.nix
     ./index.nix
     ./shell.nix

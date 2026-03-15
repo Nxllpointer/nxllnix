@@ -2,6 +2,7 @@
   imports = [
     ./git.nix
     ./shell
+    ./impermanence.nix
   ];
 
   home.stateVersion = "24.05";

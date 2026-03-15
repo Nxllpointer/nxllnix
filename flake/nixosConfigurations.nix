@@ -8,7 +8,7 @@ let
 
   createConfiguration = name:
     lib.nixosSystem {
-      modules = [ (configurationDir + "/${name}") defaultModule ];
+      modules = [ (configurationDir + "/${name}") defaultModule inputs.disko.nixosModules.disko ];
       specialArgs = { inherit inputs; };
     };
 
