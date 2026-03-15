@@ -2,6 +2,13 @@
   description = "Nxllpointer's NixOS flake";
 
   inputs = {
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+
+    import-tree.url = "github:vic/import-tree";
+
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
     home-manager = {
@@ -31,6 +38,5 @@
     };
   };
 
-  # outputs is not allowed to be a thunk so a wrapper function is used to import the outputs
-  outputs = inputs: ((import ./flake) inputs);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
 }
