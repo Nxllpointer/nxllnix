@@ -15,4 +15,12 @@
       Plugins.kzonesEnabled = true;
     };
   };
+
+  flake.modules.homeManager.impermanence = {
+    persisted = {
+      files = [
+        ".config/kwinoutputconfig.json"
+      ];
+    };
+  };
 }

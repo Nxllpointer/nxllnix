@@ -1,8 +1,15 @@
-{inputs, ...}: {
-  flake.modules.nixos.impermanence = {
-    imports = [inputs.impermanence.nixosModules.impermanence];
+{
+  inputs,
+  lib,
+  ...
+}: {
+  flake.modules.nixos.impermanence = {config, ...}: {
+    imports = [
+      inputs.impermanence.nixosModules.impermanence
+      (lib.mkAliasOptionModule ["persisted"] ["environment" "persistence" "/persisted"])
+    ];
 
-    environment.persistence."/persisted" = {
+    persisted = {
       hideMounts = true;
       directories = [
         "/var/log"
@@ -17,24 +24,25 @@
     };
   };
 
-  flake.modules.homeManager.impermanence = let
-    persistedDirs = [
-      "Documents"
-      "Downloads"
-      "Pictures"
-      "Videos"
-      "Music"
-      ".ssh"
-    ];
-  in {
-    home.persistence."/persisted" = {
-      directories = persistedDirs;
+  flake.modules.homeManager.impermanence = {config, ...}: {
+    imports = [(lib.mkAliasOptionModule ["persisted"] ["home" "persistence" "/persisted"])];
+    persisted = {
+      directories = [
+        "Documents"
+        "Downloads"
+        "Pictures"
+        "Videos"
+        "Music"
+        ".ssh"
+        ".cache/nix"
+        ".local/state/nix"
+      ];
     };
 
     home.file = builtins.listToAttrs (
       map
       (dir: {
-        name = "${dir}/.directory";
+        name = "${dir.directory}/.directory";
         value = {
           text = ''
             [Desktop Entry]
@@ -42,7 +50,7 @@
           '';
         };
       })
-      persistedDirs
+      config.persisted.directories
     );
   };
 }
