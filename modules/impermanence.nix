@@ -26,6 +26,7 @@
 
   flake.modules.homeManager.impermanence = {config, ...}: {
     imports = [(lib.mkAliasOptionModule ["persisted"] ["home" "persistence" "/persisted"])];
+
     persisted = {
       directories = [
         "Documents"
