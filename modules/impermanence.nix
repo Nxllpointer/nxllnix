@@ -34,8 +34,6 @@
         "Videos"
         "Music"
         ".ssh"
-        ".cache/nix"
-        ".local/state/nix"
       ];
     };
 

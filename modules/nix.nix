@@ -5,4 +5,13 @@
       nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
     };
   };
+
+  flake.modules.homeManager.impermanence = {
+    persisted = {
+      directories = [
+        ".cache/nix"
+        ".local/state/nix"
+      ];
+    };
+  };
 }
