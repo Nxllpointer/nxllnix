@@ -12,6 +12,10 @@
   };
 
   flake.modules.homeManager.gui = {
+    pkgs,
+    lib,
+    ...
+  }: {
     qt.kde.settings = {
       kglobalshortcutsrc = {
         services."org.kde.konsole.desktop"._launch = "Meta+T";
@@ -24,6 +28,10 @@
         KDE.AnimationDurationFactor = 0; # Instant animations
       };
     };
+
+    home.activation.plasmaTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      run ${pkgs.kdePackages.plasma-workspace}/bin/plasma-apply-lookandfeel -platform offscreen -a org.kde.breezedark.desktop
+    '';
   };
 
   flake.modules.homeManager.impermanence = {
