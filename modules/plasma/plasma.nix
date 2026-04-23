@@ -15,6 +15,8 @@
     qt.kde.settings.kglobalshortcutsrc = {
       services."org.kde.konsole.desktop"._launch = "Meta+T";
       kwin."Edit Tiles" = "none,Meta+T,Toggle Tiles Editor";
+
+      services."firefox.desktop"._launch = "Meta+F";
     };
   };
 
