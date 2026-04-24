@@ -39,6 +39,10 @@
           Rows = 1;
         };
       };
+
+      konsolerc = {
+        "Notification Messages".CloseAllTabs = true;
+      };
     };
 
     home.activation.plasmaTheme = lib.hm.dag.entryAfter ["writeBoundary"] ''
