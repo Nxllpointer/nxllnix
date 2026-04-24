@@ -57,12 +57,22 @@
           location = 0;
           plugin = "org.kde.plasma.folder";
           wallpaperplugin = "org.kde.image";
-          ItemGeometriesHorizontal = "Applet-11101:0,0,256,480,0;Applet-11102:256,0,256,208,0;Applet-11103:256,208,256,272,0;";
+          ItemGeometriesHorizontal = "Applet-11101:0,0,256,608,0;Applet-11102:256,0,288,240,0;Applet-11103:256,240,288,368,0;";
           ItemGeometries-3840x2160 = ItemGeometriesHorizontal;
 
           Applets = {
             "11101".plugin = "org.kde.plasma.systemmonitor.cpucore";
-            "11102".plugin = "org.kde.plasma.systemmonitor.memory";
+            "11102" = {
+              plugin = "org.kde.plasma.systemmonitor.memory";
+              Configuration = {
+                CurrentPreset = "org.kde.plasma.systemmonitor";
+                Sensors = {
+                  highPrioritySensorIds = ''["memory/physical/used"]'';
+                  lowPrioritySensorIds = ''["gpu/all/usedVram", "memory/physical/total"]'';
+                  totalSensors = ''["memory/physical/usedPercent"]'';
+                };
+              };
+            };
             "11103".plugin = "org.kde.plasma.systemmonitor.diskusage";
           };
         };
