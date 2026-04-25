@@ -3,12 +3,17 @@
     programs.git = {
       enable = true;
       lfs.enable = true;
-      userEmail = "54677650+Nxllpointer@users.noreply.github.com";
-      userName = "Nxllpointer";
-      delta.enable = true;
-      extraConfig = {
+      settings = {
+        user = {
+          email = "54677650+Nxllpointer@users.noreply.github.com";
+          name = "Nxllpointer";
+        };
         credential.helper = "store";
       };
+    };
+    programs.delta = {
+      enable = true;
+      enableGitIntegration = true;
     };
   };
 

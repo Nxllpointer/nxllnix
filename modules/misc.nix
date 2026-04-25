@@ -22,7 +22,7 @@
     home.packages = with pkgs; [
       libreoffice
       cameractrls-gtk4
-      config.flake.packages.${pkgs.system}.rhythia
+      config.flake.packages.${pkgs.stdenv.hostPlatform.system}.rhythia
     ];
   };
 }
