@@ -11,4 +11,8 @@
       };
     };
   };
+
+  flake.modules.homeManager.impermanence = {
+    persisted.files = [".git-credentials"];
+  };
 }
