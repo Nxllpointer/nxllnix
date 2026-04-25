@@ -5,4 +5,11 @@
       chromium.enable = true;
     };
   };
+
+  flake.modules.homeManager.impermanence = {
+    persisted.directories = [
+      ".config/mozilla/firefox"
+      ".config/chromium"
+    ];
+  };
 }
