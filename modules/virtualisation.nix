@@ -19,4 +19,10 @@
     virtualisation.docker.enable = true;
     users.users.${config.nxllnix.username}.extraGroups = ["docker"];
   };
+
+  flake.modules.nixos.impermanence = {
+    persisted.directories = [
+      "/var/lib/docker"
+    ];
+  };
 }

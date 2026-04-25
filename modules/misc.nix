@@ -25,4 +25,16 @@
       config.flake.packages.${pkgs.stdenv.hostPlatform.system}.rhythia
     ];
   };
+
+  flake.modules.homeManager.impermanence = {
+    persisted = {
+      directories = [
+        ".config/vesktop"
+        ".vscode"
+        ".config/Code"
+        ".local/share/PrismLauncher"
+        ".local/share/SoundSpacePlus"
+      ];
+    };
+  };
 }

@@ -1,4 +1,12 @@
 {
+  flake.modules.nixos.base = {pkgs, ...}: {
+    users.defaultUserShell = pkgs.nushell;
+
+    # Enable completion scripts
+    programs.fish.enable = true;
+    programs.zsh.enable = true;
+  };
+
   flake.modules.homeManager.base = {pkgs, ...}: {
     home.shell.enableNushellIntegration = true;
     programs = {
@@ -17,11 +25,10 @@
       };
     };
   };
-  flake.modules.nixos.base = {pkgs, ...}: {
-    users.defaultUserShell = pkgs.nushell;
 
-    # Enable completion scripts
-    programs.fish.enable = true;
-    programs.zsh.enable = true;
+  flake.modules.homeManager.impermanence = {
+    persisted.files = [
+      ".config/nushell/history.txt"
+    ];
   };
 }
