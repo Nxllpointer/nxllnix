@@ -6,7 +6,7 @@
   flake.modules.nixos.impermanence = {config, ...}: {
     imports = [
       inputs.impermanence.nixosModules.impermanence
-      (lib.mkAliasOptionModule ["persisted"] ["environment" "persistence" "/persisted"])
+      (lib.mkAliasOptionModule ["persisted"] ["environment" "persistence" "/persisted/"])
     ];
 
     persisted = {
@@ -25,7 +25,7 @@
   };
 
   flake.modules.homeManager.impermanence = {config, ...}: {
-    imports = [(lib.mkAliasOptionModule ["persisted"] ["home" "persistence" "/persisted"])];
+    imports = [(lib.mkAliasOptionModule ["persisted"] ["home" "persistence" "/persisted/"])];
 
     persisted = {
       directories = [

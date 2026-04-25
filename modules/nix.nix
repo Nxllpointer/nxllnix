@@ -6,6 +6,10 @@
     };
   };
 
+  flake.modules.nixos.impermanence = {
+    persisted.directories = ["root/.cache/nix"];
+  };
+
   flake.modules.homeManager.impermanence = {
     persisted = {
       directories = [
