@@ -2,8 +2,8 @@
   configurations.nixos.nxllnix-nebula.module = {
     imports = [
       ./_hardware-configuration.nix
+      ./_nvidia.nix
       config.flake.modules.nixos.impermanence
-      config.flake.modules.nixos.nvidia
     ];
 
     system.stateVersion = "25.11";
