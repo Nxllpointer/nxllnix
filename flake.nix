@@ -36,7 +36,12 @@
       url = "github:David20122/sound-space-plus";
       flake = false;
     };
+
+    extra-modules = {
+      url = "gitlab:empty-repo/empty/e84d7b81f0033399e325b8037ed2b801a5c994e0";
+      flake = false;
+    };
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree ./modules);
+  outputs = inputs: inputs.flake-parts.lib.mkFlake {inherit inputs;} (inputs.import-tree [./modules inputs.extra-modules]);
 }
