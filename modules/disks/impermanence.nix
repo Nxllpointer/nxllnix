@@ -2,6 +2,7 @@
   flake.modules.nixos.impermanence = {
     lib,
     config,
+    pkgs,
     ...
   }: let
     diskName = "nixos-${config.nxllnix.hostname}";
@@ -67,35 +68,59 @@
       };
     };
 
-    boot.initrd.postResumeCommands = ''
-      (
-        info "Impermanence > Bootstrapping..."
+    # https://github.com/nix-community/impermanence/pull/322
+    boot.initrd.systemd = {
+      initrdBin = with pkgs; [
+        btrfs-progs
+        coreutils
+        util-linux
+      ];
 
-        set -u
+      services.prune-subvolumes = {
+        requiredBy = ["initrd.target"];
+        before = ["local-fs-pre.target"];
+        after = [
+          "initrd-root-device.target"
+          "systemd-hibernate-resume.service"
+        ];
+        unitConfig.DefaultDependencies = false;
+        serviceConfig = {
+          Type = "oneshot";
+          # also print to TTY
+          StandardOutput = "journal+console";
+          StandardError = "journal+console";
+        };
+        script = ''
+          (
+            echo "Impermanence > Bootstrapping..."
 
-        DIR="/impermanence"
-        mkdir $DIR
-        mount -o "subvol=${subVolumes.impermanence.name}" ${rootPartition.device} $DIR || fail "Unable to mount impermanence subvolume"
-        cd $DIR
+            set -u
 
-        COUNTER="./counter"
-        CURRENT="./current"
+            DIR="/impermanence"
+            mkdir $DIR
+            mount -o "subvol=${subVolumes.impermanence.name}" ${rootPartition.device} $DIR || (echo "Unable to mount impermanence subvolume"; exit 1)
+            cd $DIR
 
-        CURRENT_BOOT_ID=$(cat $COUNTER || echo 1); echo $(($CURRENT_BOOT_ID + 1)) > $COUNTER
-        OLD_BOOT=$(( $CURRENT_BOOT_ID - 5 ))
+            COUNTER="./counter"
+            CURRENT="./current"
 
-        info "Impermanence > Creating root #$CURRENT_BOOT_ID"
-        btrfs subvolume create ./$CURRENT_BOOT_ID || fail "Unable to create subvolume"
-        ln -sfT ./$CURRENT_BOOT_ID $CURRENT
+            CURRENT_BOOT_ID=$(cat $COUNTER || echo 1); echo $(($CURRENT_BOOT_ID + 1)) > $COUNTER
+            OLD_BOOT=$(( $CURRENT_BOOT_ID - 5 ))
 
-        info "Impermanence > Deleting root #$OLD_BOOT"
-        btrfs subvolume delete -R ./$OLD_BOOT
+            echo "Impermanence > Creating root #$CURRENT_BOOT_ID"
+            btrfs subvolume create ./$CURRENT_BOOT_ID || (echo "Unable to create subvolume"; exit 1)
+            ln -sfT ./$CURRENT_BOOT_ID $CURRENT
 
-        cd /
-        umount $DIR
+            echo "Impermanence > Deleting root #$OLD_BOOT"
+            btrfs subvolume delete -R ./$OLD_BOOT
 
-        info "Impermanence > Finished"
-      )
-    '';
+            cd /
+            umount $DIR
+
+            echo "Impermanence > Finished"
+          )
+        '';
+      };
+    };
   };
 }
