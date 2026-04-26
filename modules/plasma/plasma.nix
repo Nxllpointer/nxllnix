@@ -115,9 +115,9 @@
       run ${pkgs.kdePackages.plasma-workspace}/bin/plasma-apply-lookandfeel -platform offscreen -a org.kde.breezedark.desktop
     '';
 
-    home.activation.plasmaRootPlace = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      run grep -q '"file:///"' ~/.local/share/user-places.xbel || \
-      run sed -i '/<\/xbel>/i<bookmark href="file:///"><title>/</title></bookmark>' ~/.local/share/user-places.xbel
+    home.activation.plasmaCustomPlaces = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      run touch ~/.local/share/user-places.xbel
+      run ${lib.getExe pkgs.git} merge-file ~/.local/share/user-places.xbel /dev/null ${./custom-places.xml} --union
     '';
   };
 
