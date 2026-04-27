@@ -8,7 +8,10 @@
           default = {
             id = 0;
             settings = {};
-            search.default = "ddg";
+            search = {
+              default = "ddg";
+              force = true;
+            };
           };
         };
       };
