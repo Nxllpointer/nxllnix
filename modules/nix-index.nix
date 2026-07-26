@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  flake.modules.homeManager.base = {
+  configuration.home = {
     imports = [inputs.nix-index-database.homeModules.nix-index];
 
     programs = {

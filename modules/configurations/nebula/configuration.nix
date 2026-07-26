@@ -1,15 +1,21 @@
-{config, ...}: {
-  configurations.nixos.nxllnix-nebula.module = {
-    imports = [
-      ./_hardware-configuration.nix
-      ./_nvidia.nix
-      config.flake.modules.nixos.impermanence
-    ];
+{
+  configurations.nxllnix-nebula = {
+    system = "x86_64-linux";
+    impermanence.enable = true;
+    gui.enable = true;
 
-    system.stateVersion = "26.05";
+    nixos = {
+      imports = [
+        ./_hardware-configuration.nix
+        ./_nvidia.nix
+      ];
 
-    nxllnix = {
+      system.stateVersion = "26.05";
       hostname = "nxllnix-nebula";
+    };
+
+    home = {
+      home.stateVersion = "26.05";
     };
   };
 }

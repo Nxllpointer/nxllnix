@@ -1,5 +1,5 @@
 {inputs, ...}: {
-  flake.modules.nixos.base = {
+  configuration.nixos = {
     imports = [
       inputs.disko.nixosModules.disko
     ];

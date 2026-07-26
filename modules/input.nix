@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.base = {pkgs, ...}: {
+  configuration.nixos = {pkgs, ...}: {
     services.ratbagd.enable = true;
     environment.systemPackages = with pkgs; [piper];
   };

@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.base = {pkgs, ...}: {
+  configuration.nixos = {pkgs, ...}: {
     security.rtkit.enable = true;
     services.pipewire = {
       enable = true;

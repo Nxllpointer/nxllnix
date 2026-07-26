@@ -1,21 +1,24 @@
 {
-  flake.modules.nixos.base = {
+  configuration = {
+    globalconfig,
     lib,
-    config,
     ...
   }: {
     options = {
-      nxllnix.username = lib.mkOption {
+      username = lib.mkOption {
         type = lib.types.str;
         default = "nxll";
       };
     };
+
     config = {
-      users.users.${config.nxllnix.username} = {
-        isNormalUser = true;
-        initialPassword = "123";
-        extraGroups = ["wheel"];
-        createHome = true;
+      nixos = {
+        users.users.${globalconfig.username} = {
+          isNormalUser = true;
+          initialPassword = "123";
+          extraGroups = ["wheel"];
+          createHome = true;
+        };
       };
     };
   };

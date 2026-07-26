@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.base = {
+  configuration.nixos = {
     services = {
       printing.enable = true;
       avahi = {

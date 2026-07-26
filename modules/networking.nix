@@ -1,17 +1,17 @@
 {
-  flake.modules.nixos.base = {
+  configuration.nixos = {
     lib,
     config,
     ...
   }: {
     options = {
-      nxllnix.hostname = lib.mkOption {
+      hostname = lib.mkOption {
         type = lib.types.str;
       };
     };
 
     config = {
-      networking.hostName = config.nxllnix.hostname;
+      networking.hostName = config.hostname;
       networking.networkmanager.enable = true;
     };
   };

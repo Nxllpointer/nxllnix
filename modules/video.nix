@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.base = {
+  configuration.nixos = {
     programs.obs-studio = {
       enable = true;
       enableVirtualCamera = true;

@@ -1,40 +1,44 @@
-{config, ...}: {
-  flake.modules.nixos.base = {pkgs, ...}: {
-    environment.systemPackages = with pkgs; [file];
-  };
-
-  flake.modules.homeManager.base = {
-    programs = {
-      btop.enable = true;
-      bat.enable = true;
+{
+  config,
+  lib,
+  ...
+}: {
+  configuration = {globalconfig, ...}: {
+    nixos = {pkgs, ...}: {
+      environment.systemPackages = with pkgs; [file];
     };
-  };
 
-  flake.modules.homeManager.gui = {pkgs, ...}: {
-    programs = {
-      vesktop.enable = true;
-      vscode.enable = true;
-      prismlauncher.enable = true;
-    };
-    services = {
-      flameshot.enable = true;
-    };
-    home.packages = with pkgs; [
-      libreoffice
-      cameractrls-gtk4
-      config.flake.packages.${pkgs.stdenv.hostPlatform.system}.rhythia
-    ];
-  };
+    home = {pkgs, ...}:
+      lib.mkMerge [
+        {
+          programs = {
+            btop.enable = true;
+            bat.enable = true;
+          };
+        }
+        (lib.mkIf globalconfig.gui.enable {
+          programs = {
+            vesktop.enable = true;
+            vscode.enable = true;
+            prismlauncher.enable = true;
+          };
 
-  flake.modules.homeManager.impermanence = {
-    persisted = {
-      directories = [
-        ".config/vesktop"
-        ".vscode"
-        ".config/Code"
-        ".local/share/PrismLauncher"
-        ".local/share/SoundSpacePlus"
+          services.flameshot.enable = true;
+
+          home.packages = with pkgs; [
+            libreoffice
+            cameractrls-gtk4
+            config.flake.packages.${pkgs.stdenv.hostPlatform.system}.rhythia
+          ];
+
+          persisted.directories = lib.mkIf globalconfig.impermanence.enable [
+            ".config/vesktop"
+            ".vscode"
+            ".config/Code"
+            ".local/share/PrismLauncher"
+            ".local/share/SoundSpacePlus"
+          ];
+        })
       ];
-    };
   };
 }

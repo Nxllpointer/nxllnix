@@ -1,29 +1,34 @@
 {
-  flake.modules.homeManager.gui = {pkgs, ...}: {
-    programs = {
-      firefox = {
-        enable = true;
+  configuration = {
+    globalconfig,
+    lib,
+    ...
+  }:
+    lib.mkIf globalconfig.gui.enable {
+      home = {pkgs, ...}: {
+        programs = {
+          firefox = {
+            enable = true;
 
-        profiles = {
-          default = {
-            id = 0;
-            settings = {};
-            search = {
-              default = "ddg";
-              force = true;
+            profiles = {
+              default = {
+                id = 0;
+                settings = {};
+                search = {
+                  default = "ddg";
+                  force = true;
+                };
+              };
             };
           };
+
+          chromium.enable = true;
         };
+
+        persisted.directories = lib.mkIf globalconfig.impermanence.enable [
+          ".config/mozilla/firefox"
+          ".config/chromium"
+        ];
       };
-
-      chromium.enable = true;
     };
-  };
-
-  flake.modules.homeManager.impermanence = {
-    persisted.directories = [
-      ".config/mozilla/firefox"
-      ".config/chromium"
-    ];
-  };
 }

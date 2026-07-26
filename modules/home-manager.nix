@@ -1,33 +1,24 @@
-{
-  inputs,
-  lib,
-  config,
-  ...
-}: let
-  homeModules = config.flake.modules.homeManager;
-in {
-  flake.modules.nixos.base = {config, ...}: {
-    imports = [
-      inputs.home-manager.nixosModules.home-manager
-      (lib.mkAliasOptionModule ["homeUser"] ["home-manager" "users" config.nxllnix.username])
-    ];
-
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      users.${config.nxllnix.username} = {};
-    };
-
-    homeUser = {
+{inputs, ...}: {
+  configuration = {globalconfig, ...}: {
+    nixos = {config, ...}: {
       imports = [
-        homeModules.base
-        homeModules.gui
+        inputs.home-manager.nixosModules.home-manager
       ];
-      home.stateVersion = config.system.stateVersion;
-    };
-  };
 
-  flake.modules.nixos.impermanence = {config, ...}: {
-    home-manager.users.${config.nxllnix.username}.imports = [homeModules.impermanence];
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+
+        users.${globalconfig.username} = {
+          imports = [globalconfig.home];
+          home.stateVersion = config.system.stateVersion;
+        };
+      };
+    };
+
+    home = {
+      home.username = globalconfig.username;
+      home.homeDirectory = "/home/${globalconfig.username}";
+    };
   };
 }

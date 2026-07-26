@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.base = {pkgs, ...}: {
+  configuration.nixos = {pkgs, ...}: {
     fonts.packages = [pkgs.nerd-fonts.jetbrains-mono];
   };
 }

@@ -1,18 +1,20 @@
 {inputs, ...}: {
-  flake.modules.nixos.base = {
-    nix = {
-      settings = {experimental-features = ["flakes" "nix-command"];};
-      nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
+  configuration = {
+    globalconfig,
+    lib,
+    ...
+  }: {
+    nixos = {
+      nix = {
+        settings = {experimental-features = ["flakes" "nix-command"];};
+        nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
+      };
+
+      persisted.directories = lib.mkIf globalconfig.impermanence.enable ["root/.cache/nix"];
     };
-  };
 
-  flake.modules.nixos.impermanence = {
-    persisted.directories = ["root/.cache/nix"];
-  };
-
-  flake.modules.homeManager.impermanence = {
-    persisted = {
-      directories = [
+    home = {
+      persisted.directories = lib.mkIf globalconfig.impermanence.enable [
         ".cache/nix"
         ".local/state/nix"
       ];
