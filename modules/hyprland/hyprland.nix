@@ -10,7 +10,7 @@
         services.displayManager.ly.enable = true;
       };
 
-      home = {lib, ...}: {
+      home = {
         programs.kitty.enable = true;
 
         services.dunst.enable = true;
@@ -21,35 +21,33 @@
           # Provided by NixOS module
           package = null;
           portalPackage = null;
-
-          settings = {
-            exec = [
-              "dunstify -t 1000 Hyprland Configured!!!"
-            ];
-
-            monitor = [",preferred,auto,auto"];
-
-            "$mod" = "SUPER";
-            bind = [
-              "$mod, Return, exec, kitty"
-              "$mod, F, exec, firefox"
-              "$mod, C, killactive"
-              "$mod, V, togglefloating"
-            ];
-            bindm = [
-              "$mod, mouse:272, movewindow"
-              "$mod, mouse:273, resizewindow"
-            ];
-
-            windowrule = [
-              {
-                name = "float-default";
-                "match:class" = ".*";
-                float = true;
-              }
-            ];
-          };
         };
       };
+
+      home.wayland.windowManager.hyprland.extraConfig =
+        # lua
+        ''
+          require("./testing")
+
+          hl.exec_cmd("dunstify -t 1000 'Hyprland Configured!!!'")
+
+          hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
+
+          hl.config({
+            input = {
+              kb_layout = "us",
+              kb_variant = "altgr-intl",
+              follow_mouse = 2
+            },
+            cursor = {
+              no_warps = true
+            }
+          })
+
+          hl.window_rule({
+            match = { class = ".*" },
+            float = true,
+          })
+        '';
     };
 }
