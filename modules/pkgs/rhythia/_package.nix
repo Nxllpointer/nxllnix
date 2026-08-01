@@ -1,60 +1,166 @@
 {
-  lib,
   stdenv,
-  rhythia-git,
-  godot3-headless,
-  godot3-export-templates,
+  godot_4_7-mono,
+  dotnetCorePackages,
+  buildDotnetModule,
   autoPatchelfHook,
   copyDesktopItems,
   makeDesktopItem,
-  libgcc,
   alsa-lib,
-  libGL,
+  brotli,
+  dbus,
+  libdecor,
+  embree,
+  enet,
+  fontconfig,
+  freetype,
+  glib,
+  glslang,
+  graphite2,
+  harfbuzz,
+  icu,
+  mbedtls,
+  miniupnpc,
+  libogg,
+  openxr-loader,
+  pcre2,
+  libpng,
   libpulseaudio,
+  sdl3,
+  speechd-minimal,
+  libtheora,
+  libjpeg_turbo,
+  udev,
+  libvorbis,
+  wayland,
+  libwebp,
+  wslay,
   libX11,
   libXcursor,
   libXext,
   libXi,
   libXinerama,
+  libxkbcommon,
   libXrandr,
   libXrender,
-  libz,
-  udev,
-  SDL2,
+  zstd,
+  vulkan-loader,
 }:
-stdenv.mkDerivation {
-  pname = "rhythia";
-  version = rhythia-git.rev;
+let
+  godot-pkg = godot_4_7-mono;
+  dotnet-sdk = dotnetCorePackages.sdk_10_0;
+  dotnet-runtime = dotnetCorePackages.runtime_10_0;
 
-  src = rhythia-git;
+  godot = godot-pkg.overrideAttrs {
+    inherit dotnet-sdk;
+  };
+  export-template = godot-pkg.export-template;
+
+  harfbuzz-raster = harfbuzz.override {
+    withRaster = true;
+    withCairo = true;
+  };
+  harfbuzz-icu = harfbuzz-raster.override {
+    withIcu = true;
+    harfbuzz = harfbuzz-raster;
+  };
+in
+buildDotnetModule {
+  pname = "rhythia";
+  version = "0.0.1-dev";
+
+  src = builtins.fetchGit {
+    url = "https://github.com/Rhythia/Client";
+    rev = "cbc8d5567b0164f87b24ae4ccc4f6b986c573109";
+    shallow = true;
+  };
+
+  projectFile = "Rhythia.csproj";
+  nugetDeps = ./deps.json;
+
+  inherit dotnet-sdk dotnet-runtime;
 
   nativeBuildInputs = [
-    godot3-headless
+    godot
     autoPatchelfHook
     copyDesktopItems
   ];
 
   buildInputs = [
-    libgcc
+    stdenv.cc.cc.lib
     alsa-lib
-    libGL
+    brotli
+    dbus
+    libdecor
+    embree
+    enet
+    fontconfig
+    freetype
+    glib
+    glslang
+    graphite2
+    harfbuzz-icu
+    icu
+    mbedtls
+    miniupnpc
+    libogg
+    openxr-loader
+    pcre2
+    libpng
+    libpulseaudio
+    sdl3
+    speechd-minimal
+    libtheora
+    libjpeg_turbo
+    udev
+    libvorbis
+    wayland
+    libwebp
+    wslay
     libX11
     libXcursor
     libXext
     libXi
     libXinerama
+    libxkbcommon
     libXrandr
     libXrender
-    libz
-    udev
-    SDL2
+    zstd
+    vulkan-loader
   ];
 
-  runtimeDependencies = map lib.getLib [
-    alsa-lib
-    libpulseaudio
-    udev
-  ];
+  # Skip default dotnet build/install. Using Godot export instead
+  dontDotnetBuild = true;
+  dontDotnetInstall = true;
+
+  buildPhase = ''
+    runHook preBuild
+
+    export HOME=$TMPDIR
+
+    mkdir -p $HOME/.local/share/godot/export_templates
+    ln -s ${export-template}/share/godot/export_templates/* $HOME/.local/share/godot/export_templates/
+
+    cp ${./export_presets.cfg} ./export_presets.cfg
+
+    godot4-mono --headless --build-solutions --quit 2>&1 || true
+
+    mkdir -p $out/share/rhythia
+    godot4-mono --headless --export-release "Linux" $out/share/rhythia/Rhythia.x86_64
+
+    runHook postBuild
+  '';
+
+  installPhase = ''
+    runHook preInstall
+
+    mkdir -p $out/bin
+    ln -s $out/share/rhythia/Rhythia.x86_64 $out/bin/rhythia
+
+    install -Dm644 textures/icon.svg $out/share/pixmaps/rhythia.svg
+
+    runHook postInstall
+  '';
 
   desktopItems = [
     (makeDesktopItem {
@@ -62,48 +168,7 @@ stdenv.mkDerivation {
       exec = "rhythia";
       icon = "rhythia";
       desktopName = "Rhythia";
-      genericName = "Rhythia";
+      genericName = "Rhythm Game";
     })
   ];
-
-  buildPhase =
-    /*
-    bash
-    */
-    ''
-      runHook preBuild
-
-      # Cannot create file '/homeless-shelter/.config/godot/projects/...'
-      export HOME=$TMPDIR
-
-      # Link the export-templates to the expected location. The --export commands
-      # expects the template-file at .../templates/{godot-version}.stable/linux_x11_64_release
-      mkdir -p $HOME/.local/share/godot
-      ln -s ${godot3-export-templates}/share/godot/templates $HOME/.local/share/godot
-
-      cp ${./export_presets.cfg} ./export_presets.cfg
-
-      mkdir -p addons/discord_game_sdk/bin/x86_64/
-      cp addons/discord_game_sdk/*.so addons/discord_game_sdk/bin/x86_64/
-
-      mkdir -p $out/share/rhythia
-      godot3-headless --export "Linux/X11" $out/share/rhythia/rhythia
-
-      runHook postBuild
-    '';
-
-  installPhase =
-    /*
-    bash
-    */
-    ''
-      runHook preInstall
-
-      mkdir -p $out/bin
-      ln -s $out/share/rhythia/rhythia $out/bin/
-
-      install -Dm644 assets/images/branding/icon.png $out/share/pixmaps/rhythia.png
-
-      runHook postInstall
-    '';
 }
