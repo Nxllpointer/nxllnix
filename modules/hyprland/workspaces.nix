@@ -25,8 +25,8 @@
         hl.bind("CTRL + SUPER + Left", hl.dsp.focus({ workspace = "e-1" }))
         hl.bind("CTRL + SUPER + Right", hl.dsp.focus({ workspace = "e+1" }))
 
-        hl.bind("SUPER + mouse_up", function() move_to_workspace("e-1") end)
-        hl.bind("SUPER + mouse_down", function() move_to_workspace("e+1") end)
+        hl.bind("CTRL + SUPER + ALT + Left", function() move_to_workspace("e-1") end)
+        hl.bind("CTRL + SUPER + ALT + Right", function() move_to_workspace("e+1") end)
       '';
   };
 }
