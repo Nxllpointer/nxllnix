@@ -13,6 +13,8 @@
         hl.bind("SUPER + C", hl.dsp.window.close())
         hl.bind("SUPER + V", hl.dsp.window.float({ action = "toggle" }))
 
+        hl.bind("SUPER + SUPER_L", hl.dsp.exec_raw("noctalia msg panel-toggle launcher"))
+
         hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
         hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 

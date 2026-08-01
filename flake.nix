@@ -32,9 +32,9 @@
       inputs.home-manager.follows = "";
     };
 
-    rhythia-git = {
-      url = "github:David20122/sound-space-plus";
-      flake = false;
+    noctalia = {
+      url = "github:noctalia-dev/noctalia";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     extra-modules = {

@@ -29,7 +29,7 @@
         ''
           require("./testing")
 
-          hl.exec_cmd("dunstify -t 1000 'Hyprland Configured!!!'")
+          hl.exec_cmd("noctalia msg notification-show 'Hyprland Configured!'")
 
           hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
 

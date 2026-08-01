@@ -148,19 +148,23 @@
         "type": "github"
       }
     },
-    "rhythia-git": {
-      "flake": false,
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1781540638,
-        "narHash": "sha256-mSgf2VUXrRZErkXem85muOEGWkyavFOM36wW1ohrm+g=",
-        "owner": "David20122",
-        "repo": "sound-space-plus",
-        "rev": "c0d6df1123680f0eb1a6d77088c0a618be7f6cc1",
+        "lastModified": 1785090322,
+        "narHash": "sha256-ttCafw0i0Zdp1rZCXN75YdJJ+m9FordPpVONf9YYKJA=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia",
+        "rev": "5ee9793149c0bf78cd787365609d4919871a38b1",
         "type": "github"
       },
       "original": {
-        "owner": "David20122",
-        "repo": "sound-space-plus",
+        "owner": "noctalia-dev",
+        "repo": "noctalia",
         "type": "github"
       }
     },
@@ -174,7 +178,7 @@
         "import-tree": "import-tree",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
-        "rhythia-git": "rhythia-git"
+        "noctalia": "noctalia"
       }
     }
   },
