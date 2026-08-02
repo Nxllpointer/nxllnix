@@ -10,7 +10,7 @@
         services.displayManager.ly.enable = true;
       };
 
-      home = {lib, ...}: {
+      home = {lib, pkgs, ...}: {
         programs.kitty.enable = true;
 
         wayland.windowManager.hyprland = {
@@ -21,6 +21,17 @@
           portalPackage = null;
         };
 
+        home.pointerCursor = {
+          enable = true;
+          name = "BreezeX-RosePine-Linux";
+          size = 64;
+          package = pkgs.rose-pine-cursor;
+          hyprcursor.enable = true;
+          hyprcursor.size = 64;
+          gtk.enable = true;
+          x11.enable = true;
+        };
+
         wayland.windowManager.hyprland.extraConfig =
           # lua
           ''
@@ -28,6 +39,7 @@
             ${builtins.readFile ./zones.lua}
             ${builtins.readFile ./workspaces.lua}
             ${builtins.readFile ./binds.lua}
+            ${builtins.readFile ./cursor.lua}
 
             require("./testing")
           '';
