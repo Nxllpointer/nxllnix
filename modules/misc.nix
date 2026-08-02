@@ -1,8 +1,4 @@
-{
-  config,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   configuration = {globalconfig, ...}: {
     nixos = {pkgs, ...}: {
       environment.systemPackages = with pkgs; [file];
@@ -28,7 +24,6 @@
           home.packages = with pkgs; [
             libreoffice
             cameractrls-gtk4
-            config.flake.packages.${pkgs.stdenv.hostPlatform.system}.rhythia
           ];
 
           persisted.directories = lib.mkIf globalconfig.impermanence.enable [
