@@ -27,38 +27,40 @@ $env.config.keybindings = [
     }
   }
 ]
-$env.config.completions.external = {
-  enable: true
-  max_results: 100
-  completer: {|spans|
-    # Expand alias
-    mut spans = $spans 
-    | skip 1
-    | prepend (
-      scope aliases
-      | where name == $spans.0
-      | get expansion
-      | get -i 0
-      | default $spans.0
-      | split row " "
-      | first
-    )
-    
-    # nix-your-shell completion script passthrough
-    if ($spans | first 2) == [nix-your-shell nu] {
-      $spans = $spans | skip 2
-    }
+$env.SHELL = "nu"
 
-    carapace $spans.0 nushell ...$spans | from json
+
+# https://www.nushell.sh/cookbook/external_completers.html
+let fish_completer = {|spans|
+  fish --command $"complete '--do-complete=($spans | str replace --all "'" "\\'" | str join ' ')'"
+  | from tsv --flexible --noheaders --no-infer
+  | rename value description
+  | update value {|row|
+    let value = $row.value
+    let need_quote = ['\' ',' '[' ']' '(' ')' ' ' '\t' "'" '"' "`"] | any {$in in $value}
+    if ($need_quote and ($value | path exists)) {
+      let expanded_path = if ($value starts-with ~) {$value | path expand --no-symlink} else {$value}
+      $'"($expanded_path | str replace --all "\"" "\\\"")"'
+    } else {$value}
   }
 }
-
-load-env {
-  CARAPACE_EXCLUDES: "nix"
-  CARAPACE_BRIDGES: "zsh,fish,bash"
+let carapace_completer = {|spans: list<string>|
+  CARAPACE_BRIDGES="fish,zsh,bash" carapace $spans.0 nushell ...$spans | from json
 }
 
-alias nix = nix-your-shell nu nix --
-alias nix-shell = nix-your-shell nu nix-shell --
+let external_completer = {|spans|
+  match $spans.0 {
+  # Carapace installable completion are meh
+  nix => $fish_completer
+  _ => $carapace_completer
+} | do $in $spans
+}
 
-$env.SHELL = "nu"
+$env.config = {
+  completions: {
+    external: {
+      enable: true
+      completer: $external_completer
+    }
+  }
+}
