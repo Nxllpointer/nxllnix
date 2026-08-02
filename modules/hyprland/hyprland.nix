@@ -10,7 +10,7 @@
         services.displayManager.ly.enable = true;
       };
 
-      home = {
+      home = {lib, ...}: {
         programs.kitty.enable = true;
 
         wayland.windowManager.hyprland = {
@@ -20,17 +20,22 @@
           package = null;
           portalPackage = null;
         };
-      };
 
-      home.wayland.windowManager.hyprland.extraConfig =
-        # lua
-        ''
-          ${builtins.readFile ./hyprland.lua}
-          ${builtins.readFile ./zones.lua}
-          ${builtins.readFile ./workspaces.lua}
-          ${builtins.readFile ./binds.lua}
+        wayland.windowManager.hyprland.extraConfig =
+          # lua
+          ''
+            ${builtins.readFile ./hyprland.lua}
+            ${builtins.readFile ./zones.lua}
+            ${builtins.readFile ./workspaces.lua}
+            ${builtins.readFile ./binds.lua}
 
           require("./testing")
+          '';
+
+        home.activation.createHyprlandTesting = lib.hm.dag.entryAfter ["linkGeneration"] ''
+            touch $HOME/.config/hypr/testing.lua
         '';
+
+      };
     };
 }
