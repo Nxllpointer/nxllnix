@@ -29,13 +29,12 @@
             ${builtins.readFile ./workspaces.lua}
             ${builtins.readFile ./binds.lua}
 
-          require("./testing")
+            require("./testing")
           '';
 
         home.activation.createHyprlandTesting = lib.hm.dag.entryAfter ["linkGeneration"] ''
-            touch $HOME/.config/hypr/testing.lua
+          touch $HOME/.config/hypr/testing.lua
         '';
-
       };
     };
 }
