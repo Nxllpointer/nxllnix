@@ -13,6 +13,10 @@
         ./_nvidia.nix
       ];
 
+      # Set SATA LPM to max_performance
+      # SanDisk SSD PLUS freezes med_power_with_dipm
+      boot.kernelParams = ["ahci.mobile_lpm_policy=1"];
+
       system.stateVersion = "26.05";
       hostname = "nxllnix-nebula";
     };
