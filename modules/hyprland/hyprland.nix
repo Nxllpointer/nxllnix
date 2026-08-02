@@ -13,8 +13,6 @@
       home = {
         programs.kitty.enable = true;
 
-        services.dunst.enable = true;
-
         wayland.windowManager.hyprland = {
           enable = true;
 
