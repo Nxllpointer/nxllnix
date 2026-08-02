@@ -27,27 +27,12 @@
       home.wayland.windowManager.hyprland.extraConfig =
         # lua
         ''
+          ${builtins.readFile ./hyprland.lua}
+          ${builtins.readFile ./zones.lua}
+          ${builtins.readFile ./workspaces.lua}
+          ${builtins.readFile ./binds.lua}
+
           require("./testing")
-
-          hl.exec_cmd("noctalia msg notification-show 'Hyprland Configured!'")
-
-          hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
-
-          hl.config({
-            input = {
-              kb_layout = "us",
-              kb_variant = "altgr-intl",
-              follow_mouse = 2
-            },
-            cursor = {
-              no_warps = true
-            }
-          })
-
-          hl.window_rule({
-            match = { class = ".*" },
-            float = true,
-          })
         '';
     };
 }
