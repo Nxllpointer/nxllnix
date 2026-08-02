@@ -25,6 +25,7 @@
       };
 
       persisted.files = lib.mkIf globalconfig.impermanence.enable [".git-credentials"];
+      persisted.directories = lib.mkIf globalconfig.impermanence.enable [".config/gh"];
     };
   };
 }
