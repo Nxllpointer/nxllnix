@@ -44,6 +44,8 @@
               show_workspace_label = false;
             };
 
+            wallpaper.default.path = ./wallpaper.png;
+
             location.auto_locate = true;
 
             shell.mpris.blacklist = ["firefox"];
@@ -58,6 +60,11 @@
               panel_card_opacity = 99;
             };
           };
+        };
+
+        xdg.stateFile."noctalia/.setup-complete" = {
+          force = true;
+          text = "";
         };
       };
     };
