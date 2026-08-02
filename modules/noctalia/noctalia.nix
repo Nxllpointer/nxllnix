@@ -15,7 +15,7 @@
 
           settings = {
             bar.default = {
-              start = ["launcher" "workspaces" "media" "audio_visualizer" "weather"];
+              start = ["launcher" "media" "audio_visualizer" "weather"];
               center = ["taskbar"];
               end = [
                 "tray"
