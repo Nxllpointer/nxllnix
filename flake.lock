@@ -168,6 +168,22 @@
         "type": "github"
       }
     },
+    "rhythia-git": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781540638,
+        "narHash": "sha256-mSgf2VUXrRZErkXem85muOEGWkyavFOM36wW1ohrm+g=",
+        "owner": "Rhythia",
+        "repo": "sound-space-plus",
+        "rev": "c0d6df1123680f0eb1a6d77088c0a618be7f6cc1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Rhythia",
+        "repo": "sound-space-plus",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "disko": "disko",
@@ -178,7 +194,8 @@
         "import-tree": "import-tree",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
-        "noctalia": "noctalia"
+        "noctalia": "noctalia",
+        "rhythia-git": "rhythia-git"
       }
     }
   },

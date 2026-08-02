@@ -37,6 +37,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    rhythia-git = {
+      url = "github:Rhythia/sound-space-plus";
+      flake = false;
+    };
+
     extra-modules = {
       url = "gitlab:empty-repo/empty/e84d7b81f0033399e325b8037ed2b801a5c994e0";
       flake = false;
