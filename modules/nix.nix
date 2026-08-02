@@ -4,20 +4,32 @@
     lib,
     ...
   }: {
-    nixos = {
-      nix = {
-        settings = {experimental-features = ["flakes" "nix-command"];};
-        nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
-      };
-
-      persisted.directories = lib.mkIf globalconfig.impermanence.enable ["root/.cache/nix"];
+    options = {
+      update-command = lib.mkOption {type = lib.types.str;};
+      rebuild-command = lib.mkOption {type = lib.types.str;};
     };
 
-    home = {
-      persisted.directories = lib.mkIf globalconfig.impermanence.enable [
-        ".cache/nix"
-        ".local/state/nix"
-      ];
+    config = {
+      nixos = {
+        nix = {
+          settings = {experimental-features = ["flakes" "nix-command"];};
+          nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
+        };
+
+        persisted.directories = lib.mkIf globalconfig.impermanence.enable ["root/.cache/nix"];
+      };
+
+      home = {pkgs, ...}: {
+        home.packages = [
+          (pkgs.writeShellScriptBin "nxllnix-update" "set -x; ${globalconfig.update-command}")
+          (pkgs.writeShellScriptBin "nxllnix-rebuild" "set -x; ${globalconfig.rebuild-command}")
+        ];
+
+        persisted.directories = lib.mkIf globalconfig.impermanence.enable [
+          ".cache/nix"
+          ".local/state/nix"
+        ];
+      };
     };
   };
 }

@@ -15,7 +15,7 @@
 
           settings = {
             bar.default = {
-              start = ["launcher" "media" "audio_visualizer" "weather"];
+              start = ["launcher" "media" "audio_visualizer" "weather" "nix-monitor"];
               center = ["taskbar"];
               end = [
                 "tray"
@@ -49,6 +49,14 @@
             shell.mpris.blacklist = ["firefox"];
 
             shell.polkit_agent = true;
+
+            plugins.enabled = ["avivbintangaringga/nix-monitor"];
+            plugin_settings."avivbintangaringga/nix-monitor" = {
+              update_command = "nxllnix-update && nxllnix-rebuild";
+              clean_command = "nix store gc -vv";
+              optimize_command = "nix store optimise -vv";
+              panel_card_opacity = 99;
+            };
           };
         };
       };

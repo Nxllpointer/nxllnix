@@ -4,6 +4,9 @@
     impermanence.enable = true;
     gui.enable = true;
 
+    update-command = "nix flake update --flake /home/nxll/Documents/nxllnix";
+    rebuild-command = "sudo nixos-rebuild switch --flake /home/nxll/Documents/nxllnix --override-input extra-modules path:/home/nxll/Documents/nxllnix-extra/extra-modules";
+
     nixos = {
       imports = [
         ./_hardware-configuration.nix
