@@ -44,6 +44,8 @@
               show_workspace_label = false;
             };
 
+            widget.nix-monitor.type = "avivbintangaringga/nix-monitor:nix-monitor";
+
             wallpaper.default.path = ./wallpaper.png;
 
             location.auto_locate = true;
