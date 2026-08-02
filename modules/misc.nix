@@ -16,7 +16,6 @@
           programs = {
             vesktop.enable = true;
             vscode.enable = true;
-            prismlauncher.enable = true;
           };
 
           services.flameshot.enable = true;
@@ -30,8 +29,6 @@
             ".config/vesktop"
             ".vscode"
             ".config/Code"
-            ".local/share/PrismLauncher"
-            ".local/share/SoundSpacePlus"
           ];
         })
       ];
