@@ -15,5 +15,9 @@ hl.config({
   },
   cursor = {
     no_warps = true
+  },
+  ecosystem = {
+    no_donation_nag = true,
+    no_update_news = true
   }
 })
