@@ -16,7 +16,10 @@
           nixPath = ["nixpkgs=${inputs.nixpkgs.outPath}"];
         };
 
-        persisted.directories = lib.mkIf globalconfig.impermanence.enable ["root/.cache/nix"];
+        persisted.directories = lib.mkIf globalconfig.impermanence.enable [
+            "root/.cache/nix"
+            "root/.local/share/nix"
+          ];
       };
 
       home = {pkgs, ...}: {
