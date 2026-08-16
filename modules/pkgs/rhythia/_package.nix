@@ -66,28 +66,27 @@ stdenv.mkDerivation {
     })
   ];
 
-  buildPhase =
-    ''
-      runHook preBuild
+  buildPhase = ''
+    runHook preBuild
 
-      # Cannot create file '/homeless-shelter/.config/godot/projects/...'
-      export HOME=$TMPDIR
+    # Cannot create file '/homeless-shelter/.config/godot/projects/...'
+    export HOME=$TMPDIR
 
-      # Link the export-templates to the expected location. The --export commands
-      # expects the template-file at .../templates/{godot-version}.stable/linux_x11_64_release
-      mkdir -p $HOME/.local/share/godot
-      ln -s ${godot3-export-templates}/share/godot/templates $HOME/.local/share/godot
+    # Link the export-templates to the expected location. The --export commands
+    # expects the template-file at .../templates/{godot-version}.stable/linux_x11_64_release
+    mkdir -p $HOME/.local/share/godot
+    ln -s ${godot3-export-templates}/share/godot/templates $HOME/.local/share/godot
 
-      cp ${./export_presets.cfg} ./export_presets.cfg
+    cp ${./export_presets.cfg} ./export_presets.cfg
 
-      mkdir -p addons/discord_game_sdk/bin/x86_64/
-      cp addons/discord_game_sdk/*.so addons/discord_game_sdk/bin/x86_64/
+    mkdir -p addons/discord_game_sdk/bin/x86_64/
+    cp addons/discord_game_sdk/*.so addons/discord_game_sdk/bin/x86_64/
 
-      mkdir -p $out/share/rhythia
-      godot3-headless --export "Linux/X11" $out/share/rhythia/rhythia
+    mkdir -p $out/share/rhythia
+    godot3-headless --export "Linux/X11" $out/share/rhythia/rhythia
 
-      runHook postBuild
-    '';
+    runHook postBuild
+  '';
 
   installPhase =
     /*

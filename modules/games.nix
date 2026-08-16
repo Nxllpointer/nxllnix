@@ -1,5 +1,9 @@
 {config, ...}: {
-  configuration = {lib, globalconfig, ...}: {
+  configuration = {
+    lib,
+    globalconfig,
+    ...
+  }: {
     home = {pkgs, ...}: {
       home.packages = [
         config.flake.packages.${pkgs.stdenv.hostPlatform.system}.rhythia

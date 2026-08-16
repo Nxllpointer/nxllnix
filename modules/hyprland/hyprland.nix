@@ -10,7 +10,11 @@
         services.displayManager.ly.enable = true;
       };
 
-      home = {lib, pkgs, ...}: {
+      home = {
+        lib,
+        pkgs,
+        ...
+      }: {
         programs.kitty.enable = true;
 
         wayland.windowManager.hyprland = {
