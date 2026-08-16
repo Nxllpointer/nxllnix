@@ -24,10 +24,10 @@
         home.pointerCursor = {
           enable = true;
           name = "BreezeX-RosePine-Linux";
-          size = 64;
+          size = 32;
           package = pkgs.rose-pine-cursor;
           hyprcursor.enable = true;
-          hyprcursor.size = 64;
+          hyprcursor.size = 32;
           gtk.enable = true;
           x11.enable = true;
         };
