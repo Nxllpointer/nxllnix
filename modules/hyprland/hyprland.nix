@@ -44,6 +44,7 @@
             ${builtins.readFile ./workspaces.lua}
             ${builtins.readFile ./binds.lua}
             ${builtins.readFile ./cursor.lua}
+            ${builtins.readFile ./pause.lua}
 
             require("./testing")
           '';
@@ -51,6 +52,7 @@
         home.activation.createHyprlandTesting = lib.hm.dag.entryAfter ["linkGeneration"] ''
           touch $HOME/.config/hypr/testing.lua
         '';
+        xdg.configFile."hypr/.luarc.json".source = ./.luarc.json;
       };
     };
 }
