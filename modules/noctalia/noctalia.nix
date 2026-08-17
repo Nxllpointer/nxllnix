@@ -44,6 +44,14 @@
               show_workspace_label = false;
             };
 
+            widget.media = {
+              album_art_only = true;
+              max_length = 40;
+              min_length = 0;
+            };
+
+            widget.audio_visualizer.show_when_idle = true;
+
             widget.nix-monitor.type = "avivbintangaringga/nix-monitor:nix-monitor";
 
             wallpaper.default.path = ./wallpaper.png;
@@ -53,6 +61,9 @@
             shell.mpris.blacklist = ["firefox"];
 
             shell.polkit_agent = true;
+
+            osd.kinds.media = false;
+
 
             plugins.enabled = ["avivbintangaringga/nix-monitor"];
             plugin_settings."avivbintangaringga/nix-monitor" = {
