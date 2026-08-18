@@ -47,3 +47,11 @@ hl.config({
     disable_hyprland_logo = true,
   }
 })
+
+hl.curve("easeInOutCubic", { type = "bezier", points = { { 0.65, 0.05 }, { 0.36, 1 } } })
+hl.animation({
+  leaf = "shadowangle",
+  enabled = true,
+  speed = 10,
+  bezier = "easeInOutCubic"
+})
