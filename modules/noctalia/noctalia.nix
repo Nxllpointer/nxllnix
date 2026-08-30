@@ -65,7 +65,6 @@
 
             osd.kinds.media = false;
 
-
             plugins.enabled = ["avivbintangaringga/nix-monitor"];
             plugin_settings."avivbintangaringga/nix-monitor" = {
               update_command = "nxllnix-update && nxllnix-rebuild";

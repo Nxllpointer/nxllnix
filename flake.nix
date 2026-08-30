@@ -41,6 +41,8 @@
       flake = false;
     };
 
+    corecycler.url = "github:Daaboulex/linux-corecycler";
+
     extra-modules = {
       url = "gitlab:empty-repo/empty/e84d7b81f0033399e325b8037ed2b801a5c994e0";
       flake = false;
