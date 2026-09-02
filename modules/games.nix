@@ -4,10 +4,14 @@
     globalconfig,
     ...
   }: {
+    nixos = {
+      programs.steam.enable = true;
+    };
+
     home = {pkgs, ...}: {
       home.packages = with pkgs; [
         config.flake.packages.${stdenv.hostPlatform.system}.rhythia
-        pkgs.osu-lazer-bin
+        osu-lazer-bin
       ];
 
       programs.prismlauncher.enable = true;
@@ -16,6 +20,8 @@
         ".local/share/SoundSpacePlus"
         ".local/share/osu"
         ".local/share/PrismLauncher"
+        ".local/share/Steam"
+        ".steam"
       ];
     };
   };
