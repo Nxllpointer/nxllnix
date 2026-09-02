@@ -33,6 +33,7 @@
         persisted.directories = lib.mkIf globalconfig.impermanence.enable [
           ".cache/nix"
           ".local/state/nix"
+          ".local/share/nix"
         ];
       };
     };
