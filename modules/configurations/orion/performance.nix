@@ -5,6 +5,9 @@
         inputs.corecycler.nixosModules.default
       ];
 
+      services.lact.enable = true;
+      hardware.amdgpu.overdrive.enable = true;
+
       services.corecycler = {
         enable = true;
         deviceAccessUser = "nxll";
