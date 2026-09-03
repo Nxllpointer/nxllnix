@@ -50,12 +50,11 @@
               min_length = 0;
             };
 
+            wallpaper.enabled = false;
+
             widget.audio_visualizer.show_when_idle = true;
 
             widget.nix-monitor.type = "avivbintangaringga/nix-monitor:nix-monitor";
-
-            wallpaper.default.path = ./wallpaper.png;
-            wallpaper.last.path = ./wallpaper.png;
 
             location.auto_locate = true;
 
