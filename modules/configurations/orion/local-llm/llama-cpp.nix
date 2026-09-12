@@ -171,11 +171,9 @@
         jq
         python3
         nodejs
-        pi-coding-agent
-        crush
       ];
 
-      persisted.directories = [".pi"];
+      persisted.directories = [".config/opencode" ".local/share/opencode" ".cache/opencode"];
     };
   };
 
