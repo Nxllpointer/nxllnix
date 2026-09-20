@@ -62,11 +62,13 @@
 
             shell.polkit_agent = true;
 
-            osd.kinds.media = false;
-
             shell.screenshot = {
               annotate = true;
             };
+
+            shell.clipboard_auto_paste = "off";
+
+            osd.kinds.media = false;
 
             plugins.enabled = ["avivbintangaringga/nix-monitor"];
             plugin_settings."avivbintangaringga/nix-monitor" = {
