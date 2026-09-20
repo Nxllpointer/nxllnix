@@ -17,6 +17,10 @@
 
       system.stateVersion = "26.05";
       hostname = "nxllnix-orion";
+
+      services.logind.settings.Login = { 
+        HandlePowerKey = "suspend";
+      };
     };
   };
 }
