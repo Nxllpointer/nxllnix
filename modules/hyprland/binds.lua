@@ -12,6 +12,8 @@ for _, direction in ipairs({ "left", "right", "up", "down" }) do
   hl.bind("SUPER + " .. direction, hl.dsp.focus({ direction = direction }))
 end
 
+hl.bind("Print", hl.dsp.exec_raw("noctalia msg screenshot-region"))
+
 hl.bind("F11", hl.dsp.window.fullscreen())
 
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"), { repeating = true })

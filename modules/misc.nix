@@ -18,8 +18,6 @@
             vscode.enable = true;
           };
 
-          services.flameshot.enable = true;
-
           home.packages = with pkgs; [
             libreoffice
             cameractrls-gtk4
