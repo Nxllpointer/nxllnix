@@ -1,0 +1,8 @@
+{
+  "pdfAsImage": true,
+  "showAgenticTurnStats": true,
+  "renderThinkingAsMarkdown": false,
+  "jsSandboxEnabled": true,
+  "showRawModelNames": true,
+  "mcpServers": "[{\"enabled\":true,\"id\":\"7p4a3164gtk\",\"url\":\"http://crw.mcp.homelab.internal/\",\"useProxy\":false}]"
+}
