@@ -21,6 +21,7 @@
           home.packages = with pkgs; [
             libreoffice
             cameractrls-gtk4
+            jetbrains.idea
           ];
 
           persisted.directories = lib.mkIf globalconfig.impermanence.enable [
