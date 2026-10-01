@@ -8,6 +8,8 @@ hl.bind("SUPER + SUPER_L", hl.dsp.exec_raw("noctalia msg panel-toggle launcher")
 hl.bind("SUPER + V", hl.dsp.exec_raw("noctalia msg panel-toggle clipboard"))
 hl.bind("Print", hl.dsp.exec_raw("noctalia msg screenshot-region"))
 
+hl.bind("SUPER + P", hl.dsp.window.pseudo())
+
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
