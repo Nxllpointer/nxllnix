@@ -154,4 +154,10 @@ hl.config({
   },
 })
 
-
+hl.window_rule({
+  match = {
+    class = ".*"
+  },
+  fullscreen = false,
+  fullscreen_state = "0 0",
+})

@@ -1,5 +1,5 @@
 {
-  configuration  ={
+  configuration = {
     nixos = {
       services.udisks2.enable = true;
     };

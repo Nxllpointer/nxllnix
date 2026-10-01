@@ -1,16 +1,9 @@
-{
-  inputs,
-  lib,
-  ...
-}: {
+{lib, ...}: {
   configuration = {globalconfig, ...}:
     lib.mkIf globalconfig.gui.enable {
       home = {pkgs, ...}: {
-        imports = [inputs.noctalia.homeModules.default];
-
         programs.noctalia = {
           enable = true;
-          package = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default;
           systemd.enable = true;
 
           settings = {

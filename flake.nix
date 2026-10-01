@@ -32,8 +32,6 @@
       inputs.home-manager.follows = "";
     };
 
-    noctalia.url = "github:noctalia-dev/noctalia";
-
     yazi.url = "github:sxyazi/yazi";
 
     rhythia-git = {
